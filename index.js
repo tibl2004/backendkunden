@@ -9,11 +9,11 @@ app.use(cors()); // CORS-Middleware aktivieren
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-const anmeldungenRouter = require('./routes/anmeldungen.router');
+const spielermeldenRouter = require('./routes/spielermelden.router');
 const trauungenRouter = require('./routes/trauungen.router');
 const authRouter = require('./routes/auth.router');
 
-app.use("/api/v1/anmeldungen", anmeldungenRouter);
+app.use("/api/v1/spielermelden", spielermeldenRouter);
 app.use("/api/v1/trauungen", trauungenRouter);
 app.use("/api/v1/auth", authRouter);
 
