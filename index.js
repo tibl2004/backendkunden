@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 const spielermeldenRouter = require('./routes/spielermelden.router');
-const bugmeldenRouter = require('./routes/bugmeldens.router');
+const bugmeldenRouter = require('./routes/bugmelden.router');
 const trauungenRouter = require('./routes/trauungen.router');
 const authRouter = require('./routes/auth.router');
 
