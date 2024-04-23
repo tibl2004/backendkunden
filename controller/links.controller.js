@@ -30,17 +30,17 @@ const LinksController = {
     },
     create: async (req, res) => {
         try {
-            const { name, image, description, customLinkText, customLinkUrl } = req.body;
-            const sql = "INSERT INTO links (name, image, description, customLinkText, customLinkUrl) VALUES (?, ?, ?, ?, ?)";
-            const [result, fields] = await pool.query(sql, [name, image, description, customLinkText, customLinkUrl]);
+            const { name, image, description, linkTitle, linkTitleUrl } = req.body;
+            const sql = "INSERT INTO links (name, image, description, linkTitle, linkTitleUrl) VALUES (?, ?, ?, ?, ?)";
+            const [result, fields] = await pool.query(sql, [name, image, description, linkTitle, linkTitleUrl]);
             res.status(201).json({
                 data: {
                     id: result.insertId,
                     name,
                     image,
                     description,
-                    customLinkText,
-                    customLinkUrl
+                    linkTitle,
+                    linkTitleUrl
                 }
             });
         } catch (error) {
@@ -52,18 +52,18 @@ const LinksController = {
     },
     update: async (req, res) => {
         try {
-            const { name, image, description, customLinkText, customLinkUrl } = req.body;
+            const { name, image, description, linkTitle, linkTitleUrl } = req.body;
             const { id } = req.params;
-            const sql = "UPDATE links SET name = ?, image = ?, description = ?, customLinkText = ?, customLinkUrl = ? WHERE id = ?";
-            const [result, fields] = await pool.query(sql, [name, image, description, customLinkText, customLinkUrl, id]);
+            const sql = "UPDATE links SET name = ?, image = ?, description = ?, linkTitle = ?, linkTitleUrl = ? WHERE id = ?";
+            const [result, fields] = await pool.query(sql, [name, image, description, linkTitle, linkTitleUrl, id]);
             res.json({
                 data: {
                     id,
                     name,
                     image,
                     description,
-                    customLinkText,
-                    customLinkUrl
+                    linkTitle,
+                    linkTitleUrl
                 }
             });
         } catch (error) {
