@@ -13,8 +13,10 @@ const spielermeldenRouter = require('./routes/spielermelden.router');
 const youtubekollegenRouter = require('./routes/youtubekollegen.router');
 const bugmeldenRouter = require('./routes/bugmelden.router');
 const linksRouter = require('./routes/links.router');
+const minecraftRouter = require('./routes/minecraft.router');
 const authRouter = require('./routes/auth.router');
 
+app.use("/api/v1/minecraft", minecraftRouter);
 app.use("/api/v1/spielermelden", spielermeldenRouter);
 app.use("/api/v1/youtubekollegen", youtubekollegenRouter);
 app.use("/api/v1/bugmelden", bugmeldenRouter);
