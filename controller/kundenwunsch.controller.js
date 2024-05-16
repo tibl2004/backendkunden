@@ -37,23 +37,23 @@ const KundenWunschController = {
     },
     create: async (req, res) => {
         try {
-            const { artikel, marke, maxPreis, vorname, nachname, adresse, plz, ort, anrede, mobil, bildLink } = req.body;
-            const sql = "INSERT INTO kundenwunsch (artikel, marke, maxPreis, vorname, nachname, adresse, plz, ort, anrede, mobil, bildLink) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            const [result, fields] = await pool.query(sql, [artikel, marke, maxPreis, vorname, nachname, adresse, plz, ort, anrede, mobil, bildLink]);
+            const {
+                vorname, nachname, telefonnummer, adresse, plz, ort, geschlecht,
+                artikelname, menge, farbe, groesse, bildBase64, beschreibung
+            } = req.body;
+            const sql = `INSERT INTO kundenwunsch (
+                vorname, nachname, telefonnummer, adresse, plz, ort, geschlecht,
+                artikelname, menge, farbe, groesse, bildBase64, beschreibung
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+            const [result, fields] = await pool.query(sql, [
+                vorname, nachname, telefonnummer, adresse, plz, ort, geschlecht,
+                artikelname, menge, farbe, groesse, bildBase64, beschreibung
+            ]);
             res.json({
                 data: {
                     id: result.insertId,
-                    artikel,
-                    marke,
-                    maxPreis,
-                    vorname,
-                    nachname,
-                    adresse,
-                    plz,
-                    ort,
-                    anrede,
-                    mobil,
-                    bildLink
+                    vorname, nachname, telefonnummer, adresse, plz, ort, geschlecht,
+                    artikelname, menge, farbe, groesse, bildBase64, beschreibung
                 }
             });
         } catch (error) {
@@ -66,9 +66,18 @@ const KundenWunschController = {
     update: async (req, res) => {
         try {
             const { id } = req.params;
-            const { artikel, marke, maxPreis, vorname, nachname, adresse, plz, ort, anrede, mobil, bildLink } = req.body;
-            const sql = "UPDATE kundenwunsch SET artikel = ?, marke = ?, maxPreis = ?, vorname = ?, nachname = ?, adresse = ?, plz = ?, ort = ?, anrede = ?, mobil = ?, bildLink = ? WHERE id = ?";
-            const [result, fields] = await pool.query(sql, [artikel, marke, maxPreis, vorname, nachname, adresse, plz, ort, anrede, mobil, bildLink, id]);
+            const {
+                vorname, nachname, telefonnummer, adresse, plz, ort, geschlecht,
+                artikelname, menge, farbe, groesse, bildBase64, beschreibung
+            } = req.body;
+            const sql = `UPDATE kundenwunsch SET
+                vorname = ?, nachname = ?, telefonnummer = ?, adresse = ?, plz = ?, ort = ?, geschlecht = ?,
+                artikelname = ?, menge = ?, farbe = ?, groesse = ?, bildBase64 = ?, beschreibung = ?
+                WHERE id = ?`;
+            const [result, fields] = await pool.query(sql, [
+                vorname, nachname, telefonnummer, adresse, plz, ort, geschlecht,
+                artikelname, menge, farbe, groesse, bildBase64, beschreibung, id
+            ]);
             if (result.affectedRows === 0) {
                 res.status(404).json({
                     status: "error",
